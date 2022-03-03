@@ -9,7 +9,7 @@ public class AmberState implements ColourState{
     }
 
     public void setState(){
-        this.trafficLight.setColourState(new RedState(this.trafficLight));
+        this.trafficLight.setColourState(new BlueState(this.trafficLight));
     }
 
     public String getColour(){

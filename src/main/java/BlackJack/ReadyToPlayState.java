@@ -8,9 +8,11 @@ public class ReadyToPlayState implements PlayerState{
         action = game.getPlayerAction(player);
         PlayerState state = this;
         if (action == BlackJackAction.TWIST) {
-            state = null;
+            state = new TwistState();
         } else if (action == BlackJackAction.STICK){
             state = new StickState();
+        } else if (action == BlackJackAction.END){
+            state = new EndState();
         } else {
             game.userOutput.output("Please select a different action");
         }

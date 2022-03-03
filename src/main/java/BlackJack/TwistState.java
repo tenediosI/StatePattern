@@ -1,8 +1,9 @@
 package BlackJack;
 
+import CardGame.Deck;
 import Player.Player;
 
-public class TwistState {
+public class TwistState implements PlayerState {
 
     public static TwistState uniqueInstance = null;
     public static TwistState getInstance(){
@@ -13,10 +14,17 @@ public class TwistState {
     }
 
     public void setState(BlackJack game, Player player, BlackJackAction action) {
-        game.userOutput.output("Twist");
+        Deck deck = game.getDeck();
+        player.getHand().add(deck.playACard());
+        if (game.getScore(player.getHand()) <= game.maxScore) {
+        	game.setPlayerState(new ReadyToPlayState(),  player, action);
+        }
+        else {
+        	game.setPlayerState(new EndState(),  player, action);
+        }
     }
     public BlackJackAction getState(){
-        return null;
+        return BlackJackAction.TWIST;
     }
 
 }
